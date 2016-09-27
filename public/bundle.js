@@ -19764,7 +19764,7 @@
 	var Results = __webpack_require__(161);
 	var History = __webpack_require__(161);
 	// Helper Function
-	var helpers = __webpack_require__(162);
+	var helpers = __webpack_require__(181);
 
 	// This is the main component.
 	var Main = React.createClass({
@@ -19965,7 +19965,7 @@
 
 	// Include React
 	var React = __webpack_require__(1);
-	var axios = __webpack_require__(163);
+	var axios = __webpack_require__(162);
 
 	// Component creation
 	var Results = React.createClass({
@@ -20025,56 +20025,22 @@
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	// Include the axios package for performing HTTP requests (promise based alternative to request)
-	var axios = __webpack_require__(163);
-
-	// Geocoder API
-	var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
-
-	// Helper Functions (in this case the only one is runQuery)
-	var helpers = {
-
-			runQuery: function runQuery(location) {
-
-					console.log(location);
-
-					//Figure out the geolocation
-					var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + geocodeAPI;
-
-					return axios.get(queryURL).then(function (response) {
-
-							console.log(response);
-							return response.data.results[0].formatted;
-					});
-			}
-
-	};
-
-	// We export the helpers function (which contains getGithubInfo)
-	module.exports = helpers;
+	module.exports = __webpack_require__(163);
 
 /***/ },
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(164);
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
-	var defaults = __webpack_require__(165);
-	var utils = __webpack_require__(166);
-	var dispatchRequest = __webpack_require__(168);
-	var InterceptorManager = __webpack_require__(177);
-	var isAbsoluteURL = __webpack_require__(178);
-	var combineURLs = __webpack_require__(179);
-	var bind = __webpack_require__(180);
-	var transformData = __webpack_require__(172);
+	var defaults = __webpack_require__(164);
+	var utils = __webpack_require__(165);
+	var dispatchRequest = __webpack_require__(167);
+	var InterceptorManager = __webpack_require__(176);
+	var isAbsoluteURL = __webpack_require__(177);
+	var combineURLs = __webpack_require__(178);
+	var bind = __webpack_require__(179);
+	var transformData = __webpack_require__(171);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -20163,7 +20129,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(181);
+	axios.spread = __webpack_require__(180);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -20191,13 +20157,13 @@
 
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
-	var normalizeHeaderName = __webpack_require__(167);
+	var utils = __webpack_require__(165);
+	var normalizeHeaderName = __webpack_require__(166);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -20269,7 +20235,7 @@
 
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20552,12 +20518,12 @@
 
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -20570,7 +20536,7 @@
 
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20592,10 +20558,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(169);
+	        adapter = __webpack_require__(168);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(169);
+	        adapter = __webpack_require__(168);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -20611,18 +20577,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(166);
-	var buildURL = __webpack_require__(170);
-	var parseHeaders = __webpack_require__(171);
-	var transformData = __webpack_require__(172);
-	var isURLSameOrigin = __webpack_require__(173);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(174);
-	var settle = __webpack_require__(175);
+	var utils = __webpack_require__(165);
+	var buildURL = __webpack_require__(169);
+	var parseHeaders = __webpack_require__(170);
+	var transformData = __webpack_require__(171);
+	var isURLSameOrigin = __webpack_require__(172);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(173);
+	var settle = __webpack_require__(174);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -20719,7 +20685,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(176);
+	    var cookies = __webpack_require__(175);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -20780,12 +20746,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 170 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -20854,12 +20820,12 @@
 
 
 /***/ },
-/* 171 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	/**
 	 * Parse headers into an object
@@ -20897,12 +20863,12 @@
 
 
 /***/ },
-/* 172 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	/**
 	 * Transform the data for a request or a response
@@ -20923,12 +20889,12 @@
 
 
 /***/ },
-/* 173 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -20997,7 +20963,7 @@
 
 
 /***/ },
-/* 174 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21039,7 +21005,7 @@
 
 
 /***/ },
-/* 175 */
+/* 174 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21063,12 +21029,12 @@
 
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -21122,12 +21088,12 @@
 
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(166);
+	var utils = __webpack_require__(165);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -21180,7 +21146,7 @@
 
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21200,7 +21166,7 @@
 
 
 /***/ },
-/* 179 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21218,7 +21184,7 @@
 
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21235,7 +21201,7 @@
 
 
 /***/ },
-/* 181 */
+/* 180 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21266,6 +21232,40 @@
 	  };
 	};
 
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	// Include the axios package for performing HTTP requests (promise based alternative to request)
+	var axios = __webpack_require__(162);
+
+	// Geocoder API
+	var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
+
+	// Helper Functions (in this case the only one is runQuery)
+	var helpers = {
+
+			runQuery: function runQuery(location) {
+
+					console.log(location);
+
+					//Figure out the geolocation
+					var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + geocodeAPI;
+
+					return axios.get(queryURL).then(function (response) {
+
+							console.log(response);
+							return response.data.results[0].formatted;
+					});
+			}
+
+	};
+
+	// We export the helpers function (which contains getGithubInfo)
+	module.exports = helpers;
 
 /***/ }
 /******/ ]);

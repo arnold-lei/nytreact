@@ -1,13 +1,8 @@
 {
-  "name": "react-example",
+  "name": "nyreact",
   "version": "1.0.0",
-  "description": "",
-  "main": "public/index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Ahmed Haque",
-  "license": "ISC",
+  "description": "New York Times React Project Rutgers coding bootcamp",
+  "main": "server.js",
   "dependencies": {
     "axios": "^0.12.0",
     "body-parser": "^1.15.2",
@@ -27,5 +22,30 @@
     "babel-preset-react": "^6.3.13",
     "json-loader": "^0.5.4",
     "webpack": "^1.13.1"
-  }
+},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnold-lei/nytreact.git"
+  },
+  "keywords": [
+    "Mongo",
+    "Express",
+    "React",
+    "Node",
+    "MERN",
+    "new",
+    "york",
+    "times",
+    "MYT"
+  ],
+  "author": "Arnold Lei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arnold-lei/nytreact/issues"
+  },
+  "homepage": "https://github.com/arnold-lei/nytreact#readme"
 }
