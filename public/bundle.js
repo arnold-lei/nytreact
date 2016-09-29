@@ -19760,9 +19760,9 @@
 	var React = __webpack_require__(1);
 
 	// Here we include all of the sub-components
-	var Form = __webpack_require__(160);
-	var Results = __webpack_require__(161);
-	var History = __webpack_require__(161);
+	var Search = __webpack_require__(182);
+	var Results = __webpack_require__(180);
+	var Save = __webpack_require__(180);
 	// Helper Function
 	var helpers = __webpack_require__(181);
 
@@ -19838,7 +19838,7 @@
 					React.createElement(
 						'div',
 						{ className: 'col-md-6' },
-						React.createElement(Form, { setTerm: this.setTerm })
+						React.createElement(Search, { setTerm: this.setTerm })
 					),
 					React.createElement(
 						'div',
@@ -19852,7 +19852,7 @@
 					React.createElement(
 						'div',
 						{ className: 'col-md-12' },
-						React.createElement(History, { address: this.state.results })
+						React.createElement(Save, { address: this.state.results })
 					)
 				)
 			);
@@ -19863,199 +19863,26 @@
 	module.exports = Main;
 
 /***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	// Include React
-	var React = __webpack_require__(1);
-
-	// Component creation
-	var Form = React.createClass({
-		displayName: 'Form',
-
-
-		// Here we set a generic state associated with the text being searched for
-		getInitialState: function getInitialState() {
-			return {
-				term: ""
-			};
-		},
-
-		// This function will respond to the user input
-		handleChange: function handleChange(event) {
-
-			// Here we create syntax to capture any change in text to the query terms (pre-search).
-			// See this Stack Overflow answer for more details:
-			// http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
-			var newState = {};
-			newState[event.target.id] = event.target.value;
-			this.setState(newState);
-			axios.post('/api', { location: this.state.location, date: this.state.date }).then(function (results) {
-				console.log("Posted to MongoDB");
-			});
-		},
-
-		// When a user submits...
-		handleClick: function handleClick() {
-
-			console.log("CLICK");
-			console.log(this.state.term);
-
-			// Set the parent to have the search term
-			this.props.setTerm(this.state.term);
-		},
-
-		// Here we render the function
-		render: function render() {
-
-			return React.createElement(
-				'div',
-				{ className: 'panel panel-default' },
-				React.createElement(
-					'div',
-					{ className: 'panel-heading' },
-					React.createElement(
-						'h3',
-						{ className: 'panel-title text-center' },
-						'Search'
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'panel-body text-center' },
-					React.createElement(
-						'form',
-						null,
-						React.createElement(
-							'div',
-							{ className: 'form-group' },
-							React.createElement(
-								'h4',
-								{ className: '' },
-								React.createElement(
-									'strong',
-									null,
-									'Topic'
-								)
-							),
-							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
-							React.createElement(
-								'h4',
-								null,
-								React.createElement(
-									'strong',
-									null,
-									'Start Year'
-								)
-							),
-							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
-							React.createElement(
-								'h4',
-								null,
-								React.createElement(
-									'strong',
-									null,
-									'End Year'
-								)
-							),
-							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
-							React.createElement('br', null),
-							React.createElement(
-								'button',
-								{ type: 'button', className: 'btn btn-primary pull-right', onClick: this.handleClick },
-								'Submit'
-							)
-						)
-					)
-				)
-			);
-		}
-	});
-
-	// Export the component back for use in other files
-	module.exports = Form;
-
-/***/ },
+/* 160 */,
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	// Include React
-	var React = __webpack_require__(1);
-	var axios = __webpack_require__(162);
-
-	// Component creation
-	var Results = React.createClass({
-		displayName: 'Results',
-
-
-		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-			console.log("COMPONENT UPDATED");
-
-			// We will check if the click count has changed...
-			if (prevState.clicks != this.state.clicks) {
-
-				// If it does, then update the clickcount in MongoDB
-				axios.post('/api', { location: this.state.location, date: this.state.date }).then(function (results) {
-					console.log("Posted to MongoDB");
-				});
-			}
-		},
-
-		// Here we render the function
-		render: function render() {
-
-			return React.createElement(
-				'div',
-				{ className: 'panel panel-default' },
-				React.createElement(
-					'div',
-					{ className: 'panel-heading' },
-					React.createElement(
-						'h3',
-						{ className: 'panel-title text-center' },
-						'Results'
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'panel-body text-center' },
-					React.createElement(
-						'p',
-						null,
-						this.props.address
-					)
-				)
-			);
-		}
-	});
-
-	// Export the component back for use in other files
-	module.exports = Results;
+	module.exports = __webpack_require__(162);
 
 /***/ },
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(163);
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
-	var defaults = __webpack_require__(164);
-	var utils = __webpack_require__(165);
-	var dispatchRequest = __webpack_require__(167);
-	var InterceptorManager = __webpack_require__(176);
-	var isAbsoluteURL = __webpack_require__(177);
-	var combineURLs = __webpack_require__(178);
-	var bind = __webpack_require__(179);
-	var transformData = __webpack_require__(171);
+	var defaults = __webpack_require__(163);
+	var utils = __webpack_require__(164);
+	var dispatchRequest = __webpack_require__(166);
+	var InterceptorManager = __webpack_require__(175);
+	var isAbsoluteURL = __webpack_require__(176);
+	var combineURLs = __webpack_require__(177);
+	var bind = __webpack_require__(178);
+	var transformData = __webpack_require__(170);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -20144,7 +19971,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(180);
+	axios.spread = __webpack_require__(179);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -20172,13 +19999,13 @@
 
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
-	var normalizeHeaderName = __webpack_require__(166);
+	var utils = __webpack_require__(164);
+	var normalizeHeaderName = __webpack_require__(165);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -20250,7 +20077,7 @@
 
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20533,12 +20360,12 @@
 
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -20551,7 +20378,7 @@
 
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20573,10 +20400,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(168);
+	        adapter = __webpack_require__(167);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(168);
+	        adapter = __webpack_require__(167);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -20592,18 +20419,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(165);
-	var buildURL = __webpack_require__(169);
-	var parseHeaders = __webpack_require__(170);
-	var transformData = __webpack_require__(171);
-	var isURLSameOrigin = __webpack_require__(172);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(173);
-	var settle = __webpack_require__(174);
+	var utils = __webpack_require__(164);
+	var buildURL = __webpack_require__(168);
+	var parseHeaders = __webpack_require__(169);
+	var transformData = __webpack_require__(170);
+	var isURLSameOrigin = __webpack_require__(171);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(172);
+	var settle = __webpack_require__(173);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -20700,7 +20527,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(175);
+	    var cookies = __webpack_require__(174);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -20761,12 +20588,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -20835,12 +20662,12 @@
 
 
 /***/ },
-/* 170 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	/**
 	 * Parse headers into an object
@@ -20878,12 +20705,12 @@
 
 
 /***/ },
-/* 171 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	/**
 	 * Transform the data for a request or a response
@@ -20904,12 +20731,12 @@
 
 
 /***/ },
-/* 172 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -20978,7 +20805,7 @@
 
 
 /***/ },
-/* 173 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21020,7 +20847,7 @@
 
 
 /***/ },
-/* 174 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21044,12 +20871,12 @@
 
 
 /***/ },
-/* 175 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -21103,12 +20930,12 @@
 
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(165);
+	var utils = __webpack_require__(164);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -21161,7 +20988,7 @@
 
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21181,7 +21008,7 @@
 
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21199,7 +21026,7 @@
 
 
 /***/ },
-/* 179 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21216,7 +21043,7 @@
 
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21249,13 +21076,72 @@
 
 
 /***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	// Include React
+	var React = __webpack_require__(1);
+	var axios = __webpack_require__(161);
+
+	// Component creation
+	var Results = React.createClass({
+		displayName: 'Results',
+
+
+		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+			console.log("COMPONENT UPDATED");
+
+			// We will check if the click count has changed...
+			if (prevState.clicks != this.state.clicks) {
+
+				// If it does, then update the clickcount in MongoDB
+				axios.post('/api', { location: this.state.location, date: this.state.date }).then(function (results) {
+					console.log("Posted to MongoDB");
+				});
+			}
+		},
+
+		// Here we render the function
+		render: function render() {
+
+			return React.createElement(
+				'div',
+				{ className: 'panel panel-default' },
+				React.createElement(
+					'div',
+					{ className: 'panel-heading' },
+					React.createElement(
+						'h3',
+						{ className: 'panel-title text-center' },
+						'Results'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'panel-body text-center' },
+					React.createElement(
+						'p',
+						null,
+						this.props.address
+					)
+				)
+			);
+		}
+	});
+
+	// Export the component back for use in other files
+	module.exports = Results;
+
+/***/ },
 /* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	// Include the axios package for performing HTTP requests (promise based alternative to request)
-	var axios = __webpack_require__(162);
+	var axios = __webpack_require__(161);
 
 	// Geocoder API
 	var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
@@ -21281,6 +21167,121 @@
 
 	// We export the helpers function (which contains getGithubInfo)
 	module.exports = helpers;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	// Include React
+	var React = __webpack_require__(1);
+
+	// Component creation
+	var Form = React.createClass({
+		displayName: 'Form',
+
+
+		// Here we set a generic state associated with the text being searched for
+		getInitialState: function getInitialState() {
+			return {
+				term: ""
+			};
+		},
+
+		// This function will respond to the user input
+		handleChange: function handleChange(event) {
+
+			// Here we create syntax to capture any change in text to the query terms (pre-search).
+			// See this Stack Overflow answer for more details:
+			// http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
+			var newState = {};
+			newState[event.target.id] = event.target.value;
+			this.setState(newState);
+			axios.post('/api', { location: this.state.location, date: this.state.date }).then(function (results) {
+				console.log("Posted to MongoDB");
+			});
+		},
+
+		// When a user submits...
+		handleClick: function handleClick() {
+
+			console.log("CLICK");
+			console.log(this.state.term);
+
+			// Set the parent to have the search term
+			this.props.setTerm(this.state.term);
+		},
+
+		// Here we render the function
+		render: function render() {
+
+			return React.createElement(
+				'div',
+				{ className: 'panel panel-default' },
+				React.createElement(
+					'div',
+					{ className: 'panel-heading' },
+					React.createElement(
+						'h3',
+						{ className: 'panel-title text-center' },
+						'Search'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'panel-body text-center' },
+					React.createElement(
+						'form',
+						null,
+						React.createElement(
+							'div',
+							{ className: 'form-group' },
+							React.createElement(
+								'h4',
+								{ className: '' },
+								React.createElement(
+									'strong',
+									null,
+									'Topic'
+								)
+							),
+							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
+							React.createElement(
+								'h4',
+								null,
+								React.createElement(
+									'strong',
+									null,
+									'Start Year'
+								)
+							),
+							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
+							React.createElement(
+								'h4',
+								null,
+								React.createElement(
+									'strong',
+									null,
+									'End Year'
+								)
+							),
+							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
+							React.createElement('br', null),
+							React.createElement(
+								'button',
+								{ type: 'button', className: 'btn btn-primary pull-right', onClick: this.handleClick },
+								'Submit'
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+	// Export the component back for use in other files
+	module.exports = Form;
 
 /***/ }
 /******/ ]);
