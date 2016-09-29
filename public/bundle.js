@@ -19823,7 +19823,7 @@
 						React.createElement(
 							'h2',
 							{ className: 'text-center' },
-							'Address Finder!'
+							'New York Times Article Scrubber'
 						),
 						React.createElement(
 							'p',
@@ -19831,7 +19831,7 @@
 							React.createElement(
 								'em',
 								null,
-								'Enter a landmark to search for its exact address (ex: "Eiffel Tower").'
+								'Search and annotate articles of interest!'
 							)
 						)
 					),
@@ -19919,7 +19919,7 @@
 					React.createElement(
 						'h3',
 						{ className: 'panel-title text-center' },
-						'Query'
+						'Search'
 					)
 				),
 				React.createElement(
@@ -19937,14 +19937,34 @@
 								React.createElement(
 									'strong',
 									null,
-									'Location'
+									'Topic'
+								)
+							),
+							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
+							React.createElement(
+								'h4',
+								null,
+								React.createElement(
+									'strong',
+									null,
+									'Start Year'
+								)
+							),
+							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
+							React.createElement(
+								'h4',
+								null,
+								React.createElement(
+									'strong',
+									null,
+									'End Year'
 								)
 							),
 							React.createElement('input', { type: 'text', className: 'form-control text-center', id: 'term', onChange: this.handleChange, required: true }),
 							React.createElement('br', null),
 							React.createElement(
 								'button',
-								{ type: 'button', className: 'btn btn-primary', onClick: this.handleClick },
+								{ type: 'button', className: 'btn btn-primary pull-right', onClick: this.handleClick },
 								'Submit'
 							)
 						)
@@ -20003,11 +20023,6 @@
 				React.createElement(
 					'div',
 					{ className: 'panel-body text-center' },
-					React.createElement(
-						'h1',
-						null,
-						'Address:'
-					),
 					React.createElement(
 						'p',
 						null,
